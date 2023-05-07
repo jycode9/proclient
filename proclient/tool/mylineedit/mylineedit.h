@@ -20,6 +20,9 @@ signals:
 
 private:
     void connectSignal();
+
+private slots:
+    void clickedKey(const QString &word);
 };
 
 #endif // MYLINEEDIT_H

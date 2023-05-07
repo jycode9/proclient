@@ -26,6 +26,15 @@ void MyLineEdit::mousePressEvent(QMouseEvent *event){
 
 void MyLineEdit::connectSignal(){
     //点击输入框，弹出键盘
-    connect(this, &MyLineEdit::clicked, MyKeyboard::getInstance(), &MyKeyboard::popUp);
+    connect(this, &MyLineEdit::clicked, [=]{
+        MyKeyboard::getInstance()->showUp(this);
+    });
 
+    //键盘输入事件
+    connect(MyKeyboard::getInstance(), &MyKeyboard::clickedKey, this, &MyLineEdit::clickedKey);
+}
+
+void MyLineEdit::clickedKey(const QString &word){
+    //将内容增加在lineedit中
+    this->insert(word);
 }
